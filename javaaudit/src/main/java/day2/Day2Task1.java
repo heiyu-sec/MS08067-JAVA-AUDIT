@@ -1,3 +1,5 @@
+package day2;
+
 /**
  * 使用switch语句改写下列if语句：
  * int a = 3;
