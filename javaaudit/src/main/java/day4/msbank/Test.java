@@ -6,6 +6,7 @@ import day4.msbank.service.BandServiceImpl;
 
 import java.util.Scanner;
 
+
 public class Test {
     static BankCustomer bankCustomers[] = new BankCustomer[2];
     static int count = 0;
@@ -97,18 +98,38 @@ public class Test {
         System.out.println("开卡身份证号码："+bankCustomers[1].getID());
     }
     public static void queryMoney(int type){
+        //heiyu增加了此部分从而解决了选择不存在的用户的问题
+        if(type > bankCustomers.length - 1 || type < 0){
+            System.out.println("用户不存在");
+            return;
+        }
         BankServiceInter bandService = new BandServiceImpl();
         bandService.queryMoney(bankCustomers[type]);
     }
     public static void getMoney(int type,double money){
+        //heiyu增加了此部分从而解决了选择不存在的用户的问题
+        if(type > bankCustomers.length - 1 || type < 0){
+            System.out.println("用户不存在");
+            return;
+        }
         BankServiceInter bandService = new BandServiceImpl();
         bandService.getMoney(bankCustomers[type],money);
     }
     public static void saveMoney(int type,double money){
+        //heiyu增加了此部分从而解决了选择不存在的用户的问题
+        if(type > bankCustomers.length - 1 || type < 0){
+            System.out.println("用户不存在");
+            return;
+        }
         BankServiceInter bandService = new BandServiceImpl();
         bandService.saveMoney(bankCustomers[type],money);
     }
     public static void transfer(int type1,int type2,double money){
+        //heiyu增加了此部分从而解决了选择不存在的用户的问题
+        if(type1 > bankCustomers.length - 1 || type2 > bankCustomers.length || type1 < 0 || type2 < 0){
+            System.out.println("用户不存在");
+            return;
+        }
         BankServiceInter bandService = new BandServiceImpl();
         bandService.transfer(bankCustomers[type1],bankCustomers[type2],money);
     }

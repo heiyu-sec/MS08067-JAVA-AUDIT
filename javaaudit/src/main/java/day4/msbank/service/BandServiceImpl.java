@@ -44,7 +44,7 @@ public class BandServiceImpl implements BankServiceInter{
     }
     //办理银行卡
     @Override
-    public BankCustomer initBankInfo(){
+    public BankCustomer initBankInfo() {
         //创建用户和申请银行卡
         BankCustomer bankCustomer = new BankCustomer();
         Scanner scanner = new Scanner(System.in);
@@ -59,9 +59,9 @@ public class BandServiceImpl implements BankServiceInter{
         bankCustomer.setID(ID);
         bankCustomer.setBalance(0);
         //生成银行卡号
-        Random ran= new Random();
-        boolean flag=true;
-        while(flag) {
+        Random ran = new Random();
+        boolean flag = true;
+        while (flag) {
             int a = ran.nextInt(99999999);
             int b = ran.nextInt(99999999);
             long c = a * 100000000L + b;
@@ -76,7 +76,12 @@ public class BandServiceImpl implements BankServiceInter{
         sdf.applyPattern("yyyy-MM-dd HH:mm:ss a");// a为am/pm的标记
         Date date = new Date();// 获取当前时间
         String useDate = sdf.format(date);
+        //Heiyu修改了以下几行解决了第三个需求
+        sdf.applyPattern("yyyy-MM-dd");
+        String recordDate = sdf.format(date);
         bankCustomer.setUseDate(useDate);
+        bankCustomer.setRecordDate(recordDate);
+        bankCustomer.setTodayMoney(0);
         return bankCustomer;
     }
 }
